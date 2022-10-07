@@ -11,4 +11,15 @@ class LockSpec extends Specification {
 		expect:
 		lock.accept("1")
 	}
+	
+	def "wrong combination"(){
+		given:
+		Lock lock = new Lock()
+		
+		when:
+		lock.accept("1")
+		
+		then:
+		lock.isLocked()
+	}
 }
