@@ -3,3 +3,8 @@
 
 # Ignore Gradle build output directory
 build
+
+mylock/.classpath
+mylock/.project
+mylock/.settings/
+mylock/bin/
