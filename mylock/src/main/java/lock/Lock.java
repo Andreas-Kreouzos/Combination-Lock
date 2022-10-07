@@ -38,6 +38,7 @@ public class Lock {
 		return Arrays.asList(new Transition[] {
 				new Transition(State.WAIT_FOR_FIRST_1, "1", State.WAIT_FOR_3),
 				new Transition(State.WAIT_FOR_3, "3", State.WAIT_FOR_LAST_1),
+				new Transition(State.WAIT_FOR_3, "1", State.WAIT_FOR_3),
 				new Transition(State.WAIT_FOR_LAST_1, "1", State.UNLOCKED)
 		});
 	}
