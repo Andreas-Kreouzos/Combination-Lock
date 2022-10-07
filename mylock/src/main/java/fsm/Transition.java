@@ -1,4 +1,6 @@
-package lock;
+package fsm;
+
+import lock.State;
 
 public class Transition {
 	

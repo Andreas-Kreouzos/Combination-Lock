@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import fsm.Transition;
+
 public class Lock {
 	
 	private State state;
@@ -13,12 +15,19 @@ public class Lock {
 	}
 	
 	public void accept(String key) {
-		Transition t = transitionMatches(key);
+		transitioning(transitionMatches(key));
+	}
+
+	private void transitioning(Transition t) {
 		if (t != null) {
 			state = t.newState;
 		} else {
 			state = State.WAIT_FOR_FIRST_1;
 		}
+	}
+	
+	public boolean isLocked() {
+		return !state.equals(State.UNLOCKED);
 	}
 	
 	private Transition transitionMatches(String key) {
@@ -30,9 +39,6 @@ public class Lock {
 		return null;
 	}
 	
-	public boolean isLocked() {
-		return !state.equals(State.UNLOCKED);
-	}
 	
 	private List<Transition> transitions() {
 		return Arrays.asList(new Transition[] {
