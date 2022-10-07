@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class LockSpec extends Specification {
 	
-	def "lock accepts key"(){
+	def "lock accepts key"() {
 		given:
 		Lock lock = new Lock()
 		
@@ -12,7 +12,7 @@ class LockSpec extends Specification {
 		lock.accept("1")
 	}
 	
-	def "wrong combination"(){
+	def "wrong combination"() {
 		given:
 		Lock lock = new Lock()
 		
@@ -21,5 +21,18 @@ class LockSpec extends Specification {
 		
 		then:
 		lock.isLocked()
+	}
+	
+	def "correct combination"() {
+		given:
+		Lock lock = new Lock()
+		
+		when:
+		lock.accept("1")
+		lock.accept("3")
+		lock.accept("1")
+		
+		then:
+		!lock.isLocked()
 	}
 }
