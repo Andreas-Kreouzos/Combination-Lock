@@ -3,12 +3,13 @@ package lock;
 import java.util.Arrays;
 import java.util.List;
 
+import fsm.Event;
 import fsm.StateMachine;
 import fsm.Transition;
 
 public class Lock {
 	
-	private StateMachine sm;
+	private StateMachine<String> sm;
 
 	
 	public Lock() {
@@ -24,12 +25,13 @@ public class Lock {
 	}
 	
 	
-	private List<Transition> transitions() {
+	@SuppressWarnings("unchecked")
+	private List<Transition<String>> transitions() {
 		return Arrays.asList(new Transition[] {
-				new Transition(LockState.WAIT_FOR_FIRST_1, "1", LockState.WAIT_FOR_3),
-				new Transition(LockState.WAIT_FOR_3, "3", LockState.WAIT_FOR_LAST_1),
-				new Transition(LockState.WAIT_FOR_3, "1", LockState.WAIT_FOR_3),
-				new Transition(LockState.WAIT_FOR_LAST_1, "1", LockState.UNLOCKED)
+				new Transition<String>(LockState.WAIT_FOR_FIRST_1, new Event<String>("1"), LockState.WAIT_FOR_3),
+				new Transition<String>(LockState.WAIT_FOR_3, new Event<String>("3"), LockState.WAIT_FOR_LAST_1),
+				new Transition<String>(LockState.WAIT_FOR_3, new Event<String>("1"), LockState.WAIT_FOR_3),
+				new Transition<String>(LockState.WAIT_FOR_LAST_1, new Event<String>("1"), LockState.UNLOCKED)
 		});
 	}
 }
