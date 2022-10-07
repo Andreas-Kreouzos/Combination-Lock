@@ -5,24 +5,23 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Lock {
-
-	private List<String> keys;
 	
 	private State state;
 	
 	public Lock() {
 		state = State.WAIT_FOR_FIRST_1;
-		keys = new ArrayList<String>();
 	}
 	
 	public void accept(String key) {
-		keys.add(key);
+		for (Transition t : transitions()) {
+			if (state.equals(t.initialState) && key.equals(t.event)) {
+				state = t.newState;
+			}
+		}
 	}
 	
 	public boolean isLocked() {
-		return !keys.equals(Arrays.asList(new String[] {
-			"1","3","1"	
-		}));
+		return !state.equals(State.UNLOCKED);
 	}
 	
 	private List<Transition> transitions() {

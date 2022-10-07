@@ -2,9 +2,9 @@ package lock;
 
 public class Transition {
 	
-	private State initialState;
-	private State newState;
-	private String event;
+	public State initialState;
+	public State newState;
+	public String event;
 	
 	public Transition(State initialState,
 			String event,
