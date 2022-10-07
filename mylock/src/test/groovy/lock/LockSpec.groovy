@@ -38,7 +38,7 @@ class LockSpec extends Specification {
 		where:
 		keys << [
 			["1","3","1"]
-
+			["8","1","7","1","3","1"]
 		]
 	}
 	
