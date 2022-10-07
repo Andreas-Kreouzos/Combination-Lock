@@ -1,6 +1,7 @@
 package lock
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class LockSpec extends Specification {
 	
@@ -10,21 +11,38 @@ class LockSpec extends Specification {
 		lock = new Lock()
 	}
 	
+	@Unroll
 	def "wrong combination"() {
 		when:
-		lock.accept("1")
+		accept(keys)
 		
 		then:
 		lock.isLocked()
+		
+		where:
+		keys << [
+			["1","1","3"]
+			["2","5","3"]
+			["3","1","3","4"]
+		]	
 	}
 	
+	@Unroll
 	def "correct combination"() {
 		when:
-		lock.accept("1")
-		lock.accept("3")
-		lock.accept("1")
+		accept(keys)
 		
 		then:
 		!lock.isLocked()
+		
+		where:
+		keys << [
+			["1","3","1"]
+
+		]
+	}
+	
+	private void accept(def keys) {
+		keys.each { key -> lock.accept(key) }
 	}
 }
