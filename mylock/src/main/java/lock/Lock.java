@@ -4,39 +4,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import fsm.StateMachine;
 import fsm.Transition;
 
 public class Lock {
 	
-	private State state;
+	private StateMachine sm;
+
 	
 	public Lock() {
-		state = State.WAIT_FOR_FIRST_1;
+		sm = new StateMachine(transitions(), State.WAIT_FOR_FIRST_1);
 	}
 	
 	public void accept(String key) {
-		transitioning(transitionMatches(key));
-	}
-
-	private void transitioning(Transition t) {
-		if (t != null) {
-			state = t.newState;
-		} else {
-			state = State.WAIT_FOR_FIRST_1;
-		}
+		sm.transitioning(key);
 	}
 	
 	public boolean isLocked() {
-		return !state.equals(State.UNLOCKED);
-	}
-	
-	private Transition transitionMatches(String key) {
-		for (Transition t : transitions()) {
-			if (state.equals(t.initialState) && key.equals(t.event)) {
-				return t;
-			}
-		}
-		return null;
+		return !sm.getState().equals(State.UNLOCKED);
 	}
 	
 	
