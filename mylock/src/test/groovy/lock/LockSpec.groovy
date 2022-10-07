@@ -4,18 +4,13 @@ import spock.lang.Specification
 
 class LockSpec extends Specification {
 	
-	def "lock accepts key"() {
-		given:
-		Lock lock = new Lock()
-		
-		expect:
-		lock.accept("1")
+	Lock lock
+	
+	def setup() {
+		lock = new Lock()
 	}
 	
 	def "wrong combination"() {
-		given:
-		Lock lock = new Lock()
-		
 		when:
 		lock.accept("1")
 		
@@ -24,9 +19,6 @@ class LockSpec extends Specification {
 	}
 	
 	def "correct combination"() {
-		given:
-		Lock lock = new Lock()
-		
 		when:
 		lock.accept("1")
 		lock.accept("3")

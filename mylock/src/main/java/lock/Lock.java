@@ -17,9 +17,8 @@ public class Lock {
 	}
 	
 	public boolean isLocked() {
-		List<String> unlockCode = Arrays.asList(new String[] {
+		return !keys.equals(Arrays.asList(new String[] {
 			"1","3","1"	
-		});
-		return !keys.equals(unlockCode);
+		}));
 	}
 }
