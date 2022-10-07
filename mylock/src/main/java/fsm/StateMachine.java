@@ -2,8 +2,6 @@ package fsm;
 
 import java.util.List;
 
-import lock.State;
-
 public class StateMachine {
 	
 	private State state;

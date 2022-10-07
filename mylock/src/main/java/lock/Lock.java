@@ -1,6 +1,5 @@
 package lock;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Lock {
 
 	
 	public Lock() {
-		sm = new StateMachine(transitions(), State.WAIT_FOR_FIRST_1);
+		sm = new StateMachine(transitions(), LockState.WAIT_FOR_FIRST_1);
 	}
 	
 	public void accept(String key) {
@@ -21,16 +20,16 @@ public class Lock {
 	}
 	
 	public boolean isLocked() {
-		return !sm.getState().equals(State.UNLOCKED);
+		return !sm.getState().equals(LockState.UNLOCKED);
 	}
 	
 	
 	private List<Transition> transitions() {
 		return Arrays.asList(new Transition[] {
-				new Transition(State.WAIT_FOR_FIRST_1, "1", State.WAIT_FOR_3),
-				new Transition(State.WAIT_FOR_3, "3", State.WAIT_FOR_LAST_1),
-				new Transition(State.WAIT_FOR_3, "1", State.WAIT_FOR_3),
-				new Transition(State.WAIT_FOR_LAST_1, "1", State.UNLOCKED)
+				new Transition(LockState.WAIT_FOR_FIRST_1, "1", LockState.WAIT_FOR_3),
+				new Transition(LockState.WAIT_FOR_3, "3", LockState.WAIT_FOR_LAST_1),
+				new Transition(LockState.WAIT_FOR_3, "1", LockState.WAIT_FOR_3),
+				new Transition(LockState.WAIT_FOR_LAST_1, "1", LockState.UNLOCKED)
 		});
 	}
 }

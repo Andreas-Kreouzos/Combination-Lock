@@ -1,16 +1,16 @@
 package fsm;
 
-import lock.State;
+import lock.LockState;
 
 public class Transition {
 	
-	public State initialState;
-	public State newState;
+	public LockState initialState;
+	public LockState newState;
 	public String event;
 	
-	public Transition(State initialState,
+	public Transition(LockState initialState,
 			String event,
-			State newState) {
+			LockState newState) {
 		this.initialState = initialState;
 		this.event = event;
 		this.newState = newState;
